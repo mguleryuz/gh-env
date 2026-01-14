@@ -1,15 +1,15 @@
 #!/usr/bin/env bun
 /**
- * gh-env CLI
+ * ghvars CLI
  *
  * Sync .env files and manage GitHub Actions secrets/variables
  *
  * Usage:
- *   gh-env               # Interactive menu
- *   gh-env sync          # Sync .env with .env.example
- *   gh-env push          # Push all secrets & variables to GitHub
- *   gh-env push -i       # Interactive selection
- *   gh-env pull          # Pull variables from GitHub to .env
+ *   ghvars               # Interactive menu
+ *   ghvars sync          # Sync .env with .env.example
+ *   ghvars push          # Push all secrets & variables to GitHub
+ *   ghvars push -i       # Interactive selection
+ *   ghvars pull          # Pull variables from GitHub to .env
  */
 
 import { Command } from "commander";
@@ -42,10 +42,10 @@ async function ensureEnvExample(): Promise<boolean> {
   if (!status.exists) {
     console.log(yellow("\n⚠️  No .env.example found in this directory.\n"));
     console.log(
-      dim("  gh-env uses .env.example as the template for your environment")
+      dim("  ghvars uses .env.example as the template for your environment"),
     );
     console.log(
-      dim("  variables, with annotations to mark secrets and variables.\n")
+      dim("  variables, with annotations to mark secrets and variables.\n"),
     );
 
     const shouldCreate = await confirm({
@@ -57,7 +57,7 @@ async function ensureEnvExample(): Promise<boolean> {
       createEnvExampleTemplate(cwd);
       console.log(green("\n✓ Created .env.example with template sections\n"));
       console.log(
-        dim("  Edit the file to add your variables, then run gh-env again.")
+        dim("  Edit the file to add your variables, then run ghvars again."),
       );
       console.log(dim("  Use annotations on section headers:\n"));
       console.log(cyan("    # CREDENTIALS @secrets"));
@@ -69,14 +69,14 @@ async function ensureEnvExample(): Promise<boolean> {
       return false;
     } else {
       console.log(
-        dim("\n  Create a .env.example file manually with your variables.")
+        dim("\n  Create a .env.example file manually with your variables."),
       );
       console.log(dim("  Use annotations on section headers:\n"));
       console.log(
-        cyan("    # CREDENTIALS @secrets    → GitHub Secrets (hidden)")
+        cyan("    # CREDENTIALS @secrets    → GitHub Secrets (hidden)"),
       );
       console.log(
-        cyan("    # SETTINGS @variables     → GitHub Variables (visible)")
+        cyan("    # SETTINGS @variables     → GitHub Variables (visible)"),
       );
       console.log();
       return false;
@@ -87,11 +87,11 @@ async function ensureEnvExample(): Promise<boolean> {
   if (!status.hasAnyAnnotation) {
     console.log(
       yellow(
-        "\n⚠️  No @secrets or @variables annotations found in .env.example\n"
-      )
+        "\n⚠️  No @secrets or @variables annotations found in .env.example\n",
+      ),
     );
     console.log(
-      dim("  gh-env uses annotations on section headers to determine how to")
+      dim("  ghvars uses annotations on section headers to determine how to"),
     );
     console.log(dim("  push variables to GitHub:\n"));
     console.log(dim("    @secrets   → GitHub Secrets (hidden in logs)"));
@@ -122,13 +122,15 @@ async function ensureEnvExample(): Promise<boolean> {
   // Case 3: Has annotations but some variables are untagged
   if (status.untaggedCount > 0) {
     console.log(
-      yellow(`\n⚠️  ${status.untaggedCount} variable(s) in untagged sections\n`)
+      yellow(
+        `\n⚠️  ${status.untaggedCount} variable(s) in untagged sections\n`,
+      ),
     );
     console.log(dim("  These variables won't be pushed to GitHub."));
     console.log(
       dim(
-        "  Add @secrets or @variables to their section headers to include them.\n"
-      )
+        "  Add @secrets or @variables to their section headers to include them.\n",
+      ),
     );
   }
 
@@ -136,7 +138,7 @@ async function ensureEnvExample(): Promise<boolean> {
 }
 
 program
-  .name("gh-env")
+  .name("ghvars")
   .description("Sync .env files and manage GitHub Actions secrets/variables")
   .version("1.0.0")
   .hook("preAction", () => {
@@ -176,7 +178,7 @@ program
 program
   .command("sync")
   .description(
-    "Sync .env with .env.example (add new, remove deprecated, preserve values)"
+    "Sync .env with .env.example (add new, remove deprecated, preserve values)",
   )
   .action(async () => {
     await syncCommand();

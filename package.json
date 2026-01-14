@@ -1,10 +1,10 @@
 {
-  "name": "gh-env",
-  "version": "0.0.2",
+  "name": "ghvars",
+  "version": "0.0.0",
   "description": "Sync .env files and manage GitHub Actions secrets/variables",
   "type": "module",
   "bin": {
-    "gh-env": "./dist/cli.js"
+    "ghvars": "./dist/cli.js"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",

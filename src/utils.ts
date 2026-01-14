@@ -13,7 +13,7 @@ export function truncate(s: string, len: number): string {
 export function printHeader(): void {
   console.log();
   console.log(bold(cyan("  ┌─────────────────────────────────────┐")));
-  console.log(bold(cyan("  │       gh-env · Environment CLI     │")));
+  console.log(bold(cyan("  │       ghvars · Environment CLI     │")));
   console.log(bold(cyan("  └─────────────────────────────────────┘")));
   console.log();
 }

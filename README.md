@@ -1,4 +1,4 @@
-# gh-env
+# ghvars
 
 Sync `.env` files and manage GitHub Actions secrets/variables from your `.env.example` template.
 
@@ -13,29 +13,29 @@ Sync `.env` files and manage GitHub Actions secrets/variables from your `.env.ex
 
 ```bash
 # In a Bun workspace
-bun add gh-env
+bun add ghvars
 
 # Or install globally
-bun add -g gh-env
+bun add -g ghvars
 ```
 
 ## Quick Start
 
 ```bash
 # Run interactive menu
-gh-env
+ghvars
 
 # Or use specific commands
-gh-env sync          # Sync .env with .env.example
-gh-env push          # Push all secrets & variables to GitHub
-gh-env pull          # Pull variables from GitHub
+ghvars sync          # Sync .env with .env.example
+ghvars push          # Push all secrets & variables to GitHub
+ghvars pull          # Pull variables from GitHub
 ```
 
 ## Configuration
 
 ### Annotating Sections
 
-`gh-env` reads your `.env.example` to determine which variables are secrets vs variables. Use annotations on section headers:
+`ghvars` reads your `.env.example` to determine which variables are secrets vs variables. Use annotations on section headers:
 
 ```bash
 # =============================================================================
@@ -53,11 +53,11 @@ API_KEY=""
 DATABASE_URL=""
 ```
 
-| Annotation | GitHub Target | Visibility |
-|------------|---------------|------------|
-| `@secrets` | GitHub Secrets | Hidden in logs |
+| Annotation   | GitHub Target    | Visibility      |
+| ------------ | ---------------- | --------------- |
+| `@secrets`   | GitHub Secrets   | Hidden in logs  |
 | `@variables` | GitHub Variables | Visible in logs |
-| *(none)* | Skipped | Not pushed |
+| _(none)_     | Skipped          | Not pushed      |
 
 ### Section Header Formats
 
@@ -79,7 +79,7 @@ These are NOT sections (just sub-headers/comments):
 
 ## Commands
 
-### `gh-env` (no args)
+### `ghvars` (no args)
 
 Interactive menu with all options:
 
@@ -91,58 +91,59 @@ Interactive menu with all options:
   ⬇️  Pull variables from GitHub
 ```
 
-### `gh-env sync`
+### `ghvars sync`
 
 Syncs `.env` with `.env.example`:
+
 - Adds new variables from template
 - Removes deprecated variables not in template
 - Preserves existing values
 - Updates structure (comments, sections, annotations)
 
 ```bash
-gh-env sync
+ghvars sync
 
 # Output:
 # 📋 .env.example has 33 variables
 #    (10 secrets, 23 variables)
-# 
+#
 # ✓ Added 2 new variable(s):
 #    + NEW_VAR_1
 #    + NEW_VAR_2
-# 
+#
 # 📝 Updated .env
 #    31 preserved, 2 added, 0 removed
 ```
 
-### `gh-env push`
+### `ghvars push`
 
 Push secrets and variables to GitHub Actions.
 
 ```bash
-gh-env push              # Push all
-gh-env push -i           # Interactive selection
-gh-env push -s           # Secrets only
-gh-env push -v           # Variables only
+ghvars push              # Push all
+ghvars push -i           # Interactive selection
+ghvars push -s           # Secrets only
+ghvars push -v           # Variables only
 ```
 
 Requires [GitHub CLI](https://cli.github.com/) (`gh`) to be installed and authenticated.
 
-### `gh-env pull`
+### `ghvars pull`
 
 Pull variables from GitHub to `.env`.
 
 ```bash
-gh-env pull
+ghvars pull
 ```
 
 > **Note:** Secrets cannot be pulled (GitHub security restriction).
 
-### `gh-env init`
+### `ghvars init`
 
 Create a template `.env.example` file:
 
 ```bash
-gh-env init
+ghvars init
 ```
 
 ## Example `.env.example`
