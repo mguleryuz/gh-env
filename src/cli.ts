@@ -1,15 +1,15 @@
 #!/usr/bin/env bun
 /**
- * git-env CLI
+ * gh-env CLI
  *
  * Sync .env files and manage GitHub Actions secrets/variables
  *
  * Usage:
- *   git-env               # Interactive menu
- *   git-env sync          # Sync .env with .env.example
- *   git-env push          # Push all secrets & variables to GitHub
- *   git-env push -i       # Interactive selection
- *   git-env pull          # Pull variables from GitHub to .env
+ *   gh-env               # Interactive menu
+ *   gh-env sync          # Sync .env with .env.example
+ *   gh-env push          # Push all secrets & variables to GitHub
+ *   gh-env push -i       # Interactive selection
+ *   gh-env pull          # Pull variables from GitHub to .env
  */
 
 import { Command } from "commander";
@@ -42,7 +42,7 @@ async function ensureEnvExample(): Promise<boolean> {
   if (!status.exists) {
     console.log(yellow("\n⚠️  No .env.example found in this directory.\n"));
     console.log(
-      dim("  git-env uses .env.example as the template for your environment")
+      dim("  gh-env uses .env.example as the template for your environment")
     );
     console.log(
       dim("  variables, with annotations to mark secrets and variables.\n")
@@ -57,7 +57,7 @@ async function ensureEnvExample(): Promise<boolean> {
       createEnvExampleTemplate(cwd);
       console.log(green("\n✓ Created .env.example with template sections\n"));
       console.log(
-        dim("  Edit the file to add your variables, then run git-env again.")
+        dim("  Edit the file to add your variables, then run gh-env again.")
       );
       console.log(dim("  Use annotations on section headers:\n"));
       console.log(cyan("    # CREDENTIALS @secrets"));
@@ -91,7 +91,7 @@ async function ensureEnvExample(): Promise<boolean> {
       )
     );
     console.log(
-      dim("  git-env uses annotations on section headers to determine how to")
+      dim("  gh-env uses annotations on section headers to determine how to")
     );
     console.log(dim("  push variables to GitHub:\n"));
     console.log(dim("    @secrets   → GitHub Secrets (hidden in logs)"));
@@ -136,7 +136,7 @@ async function ensureEnvExample(): Promise<boolean> {
 }
 
 program
-  .name("git-env")
+  .name("gh-env")
   .description("Sync .env files and manage GitHub Actions secrets/variables")
   .version("1.0.0")
   .hook("preAction", () => {

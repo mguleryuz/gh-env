@@ -1,4 +1,4 @@
-# git-env
+# gh-env
 
 Sync `.env` files and manage GitHub Actions secrets/variables from your `.env.example` template.
 
@@ -13,29 +13,29 @@ Sync `.env` files and manage GitHub Actions secrets/variables from your `.env.ex
 
 ```bash
 # In a Bun workspace
-bun add git-env
+bun add gh-env
 
 # Or install globally
-bun add -g git-env
+bun add -g gh-env
 ```
 
 ## Quick Start
 
 ```bash
 # Run interactive menu
-git-env
+gh-env
 
 # Or use specific commands
-git-env sync          # Sync .env with .env.example
-git-env push          # Push all secrets & variables to GitHub
-git-env pull          # Pull variables from GitHub
+gh-env sync          # Sync .env with .env.example
+gh-env push          # Push all secrets & variables to GitHub
+gh-env pull          # Pull variables from GitHub
 ```
 
 ## Configuration
 
 ### Annotating Sections
 
-`git-env` reads your `.env.example` to determine which variables are secrets vs variables. Use annotations on section headers:
+`gh-env` reads your `.env.example` to determine which variables are secrets vs variables. Use annotations on section headers:
 
 ```bash
 # =============================================================================
@@ -79,7 +79,7 @@ These are NOT sections (just sub-headers/comments):
 
 ## Commands
 
-### `git-env` (no args)
+### `gh-env` (no args)
 
 Interactive menu with all options:
 
@@ -91,7 +91,7 @@ Interactive menu with all options:
   ⬇️  Pull variables from GitHub
 ```
 
-### `git-env sync`
+### `gh-env sync`
 
 Syncs `.env` with `.env.example`:
 - Adds new variables from template
@@ -100,7 +100,7 @@ Syncs `.env` with `.env.example`:
 - Updates structure (comments, sections, annotations)
 
 ```bash
-git-env sync
+gh-env sync
 
 # Output:
 # 📋 .env.example has 33 variables
@@ -114,35 +114,35 @@ git-env sync
 #    31 preserved, 2 added, 0 removed
 ```
 
-### `git-env push`
+### `gh-env push`
 
 Push secrets and variables to GitHub Actions.
 
 ```bash
-git-env push              # Push all
-git-env push -i           # Interactive selection
-git-env push -s           # Secrets only
-git-env push -v           # Variables only
+gh-env push              # Push all
+gh-env push -i           # Interactive selection
+gh-env push -s           # Secrets only
+gh-env push -v           # Variables only
 ```
 
 Requires [GitHub CLI](https://cli.github.com/) (`gh`) to be installed and authenticated.
 
-### `git-env pull`
+### `gh-env pull`
 
 Pull variables from GitHub to `.env`.
 
 ```bash
-git-env pull
+gh-env pull
 ```
 
 > **Note:** Secrets cannot be pulled (GitHub security restriction).
 
-### `git-env init`
+### `gh-env init`
 
 Create a template `.env.example` file:
 
 ```bash
-git-env init
+gh-env init
 ```
 
 ## Example `.env.example`

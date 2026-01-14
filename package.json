@@ -1,24 +1,41 @@
 {
-  "name": "git-env",
+  "name": "gh-env",
   "version": "1.0.0",
   "description": "Sync .env files and manage GitHub Actions secrets/variables",
   "type": "module",
   "bin": {
-    "git-env": "./src/cli.ts"
+    "gh-env": "./dist/cli.js"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
   },
-  "scripts": {},
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "bun build src/index.ts src/cli.ts --outdir dist --target bun --splitting && tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "bun run clean && bun run build",
+    "publish:npm": "bun run prepublishOnly && npm publish --access public"
+  },
   "dependencies": {
     "commander": "^13.0.0",
     "@inquirer/prompts": "^7.2.1"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "typescript": "^5.7.0"
   },
-  "peerDependencies": {
-    "typescript": "^5"
+  "engines": {
+    "bun": ">=1.0.0"
   },
   "keywords": [
     "env",
@@ -26,7 +43,8 @@
     "github",
     "secrets",
     "variables",
-    "cli"
+    "cli",
+    "bun"
   ],
   "license": "MIT"
 }
