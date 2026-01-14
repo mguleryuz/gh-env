@@ -24,14 +24,32 @@
     "build": "bun build src/index.ts src/cli.ts --outdir dist --target bun --splitting && tsc",
     "clean": "rm -rf dist",
     "prepublishOnly": "bun run clean && bun run build",
-    "publish:npm": "bun run prepublishOnly && npm publish --access public"
+    "postinstall": "husky || true",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable",
+    "release": "standard-version -a",
+    "release:alpha": "standard-version -a --prerelease alpha --skip.changelog",
+    "release:beta": "standard-version -a --prerelease beta --skip.changelog",
+    "release:pub": "git push --follow-tags origin $(git rev-parse --abbrev-ref HEAD)"
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "commander": "^13.0.0",
     "@inquirer/prompts": "^7.2.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@types/bun": "latest",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "pinst": "^3.0.0",
+    "prettier": "^3.6.2",
+    "standard-version": "^9.5.0",
     "typescript": "^5.7.0"
   },
   "engines": {
