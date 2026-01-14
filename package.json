@@ -1,0 +1,32 @@
+{
+  "name": "git-env",
+  "version": "1.0.0",
+  "description": "Sync .env files and manage GitHub Actions secrets/variables",
+  "type": "module",
+  "bin": {
+    "git-env": "./src/cli.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {},
+  "dependencies": {
+    "commander": "^13.0.0",
+    "@inquirer/prompts": "^7.2.1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "keywords": [
+    "env",
+    "dotenv",
+    "github",
+    "secrets",
+    "variables",
+    "cli"
+  ],
+  "license": "MIT"
+}
