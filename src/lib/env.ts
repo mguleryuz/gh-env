@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import { type EnvLine, parseEnvFile, getEnvVariables } from "./parser";
+import { parseEnvFile, getEnvVariables } from "./parser";
 
 /**
  * Load .env file values as a map
